@@ -6,8 +6,9 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use JsonSerializable;
 
-class Lines implements Countable , IteratorAggregate, ArrayAccess{
+class Lines implements Countable , IteratorAggregate, ArrayAccess,JsonSerializable{
     protected $lines;
 
     public function __construct(array $lines)
@@ -73,5 +74,9 @@ class Lines implements Countable , IteratorAggregate, ArrayAccess{
         unset($this->line[$key]);
     }
 
+    public function jsonSerialize()
+    {
+        return $this->lines;
+    }
 
 }

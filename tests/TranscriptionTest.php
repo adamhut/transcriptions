@@ -5,6 +5,7 @@ use ArrayAccess;
 use Ahuang\Transcription\Line;
 use PHPUnit\Framework\TestCase;
 use Ahuang\Transcription\Transcription;
+use JsonSerializable;
 
 class TranscriptionTest extends TestCase
 {
@@ -84,6 +85,19 @@ EOT;
         $this->assertInstanceOf(ArrayAccess::class,$lines);
 
         $this->assertInstanceOf(Line::class, $lines);
+    }
+
+
+    /** @test */
+    public function it_can_render_as_json()
+    {
+        $lines = $this->transcription->lines();
+
+        $this->assertInstanceOf(JsonSerializable::class, $lines);
+
+        $this->assertJson(json_encode($lines));
+
+
     }
 
 }
