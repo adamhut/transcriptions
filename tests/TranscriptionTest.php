@@ -84,7 +84,7 @@ EOT;
 
         $this->assertInstanceOf(ArrayAccess::class,$lines);
 
-        $this->assertInstanceOf(Line::class, $lines);
+        $this->assertInstanceOf(Line::class, $lines[0]);
     }
 
 
