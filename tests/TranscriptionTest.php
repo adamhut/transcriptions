@@ -1,6 +1,7 @@
 <?php
 namespace Tests;
 
+use ArrayAccess;
 use Ahuang\Transcription\Line;
 use PHPUnit\Framework\TestCase;
 use Ahuang\Transcription\Transcription;
@@ -73,6 +74,16 @@ EOT;
 
         $this->assertEquals($expected, $result);
 
+    }
+
+    /** @test */
+    public function it_support_array_access()
+    {
+        $lines = $this->transcription->lines();
+
+        $this->assertInstanceOf(ArrayAccess::class,$lines);
+
+        $this->assertInstanceOf(Line::class, $lines);
     }
 
 }

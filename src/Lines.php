@@ -2,11 +2,12 @@
 
 namespace Ahuang\Transcription;
 
+use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
-class Lines implements Countable , IteratorAggregate{
+class Lines implements Countable , IteratorAggregate, ArrayAccess{
     protected $lines;
 
     public function __construct(array $lines)
@@ -46,5 +47,31 @@ class Lines implements Countable , IteratorAggregate{
     {
         return;
     }
+
+    public function offsetExists($key)
+    {
+        return isset($this->lines[$key]);
+    }
+
+    public function offsetGet($key)
+    {
+        return $this->lines[$key];
+    }
+
+    public function offsetSet($key,$value)
+    {
+        if(is_null($key))
+        {
+            $this->lines[] = $value;
+        }else{
+            $this->lines[$key] = $value;
+        }
+
+    }
+    public function offsetUnset($key)
+    {
+        unset($this->line[$key]);
+    }
+
 
 }
